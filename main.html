@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cactus♡</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(196, 218, 196);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cactus {
+            text-align: center;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: clamp(40px, 8vw, 60px);
+            color: rgb(67, 120, 67);
+            font-weight: 1000;
+            -webkit-text-stroke: 1px rgb(35, 69, 35);
+            margin: 0 0 10px 0;
+        }
+
+        p {
+            font-size: clamp(16px, 3vw, 19px);
+            color: rgb(73, 73, 73);
+            margin: 0 0 20px 0;
+        }
+
+        #bookImage0 {
+            width: clamp(200px, 40vw, 300px);
+            height: clamp(200px, 40vw, 300px);
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        input,
+        button {
+            border: none;
+            outline: none;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 100%;
+            max-width: 300px;
+            height: 40px;
+            text-align: center;
+            margin: 10px 0;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+
+        button {
+            width: 120px;
+            height: 40px;
+            background-color: rgb(77, 116, 77);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: rgb(57, 96, 57);
+        }
+
+        .money-left,
+        .money-right {
+            position: absolute;
+            width: clamp(200px, 25vw, 420px);
+            height: auto;
+            z-index: 0;
+        }
+
+        .money-left {
+            bottom: 10%;
+            left: 5%;
+        }
+
+        .money-right {
+            bottom: 10%;
+            right: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="cactus">
+            <h1>My Cactus♡</h1>
+            <p>나만의 금호 선인장 키우기</p>
+            <img src="image/씨앗.png" id="bookImage0" alt="선인장 씨앗">
+            <br>
+            <input type="text" id="name" placeholder="시작하려면 선인장의 이름을 입력하세요.">
+            <br>
+            <button onclick="startCactus()">확인</button>
+        </div>
+    </div>
+
+    <img src="image/money.png" class="money-left" id="moneyLeft" style="display:none;">
+    <img src="image/money.png" class="money-right" id="moneyRight" style="display:none;">
+
+    <script>
+
+        // '확인' 버튼 클릭 시 게임 시작 처리
+        function startCactus() {
+            const name = document.getElementById("name").value.trim(); // 입력된 선인장 이름 가져오기
+
+            if (name) { // 이름이 입력되었다면
+                // 게임 시작 안내 메시지 출력
+                alert(`${name}을(를) 끝까지 잘 키우시길 바래요! 🌵`);
+                alert("규칙 1. 물을 적당히 줄 것.");
+                alert("규칙 2. 과한 햇빛을 쐬지 않을 것.");
+                alert("규칙 3. 정성을 가득 담아 이쁘게 키울 것.");
+                alert("그럼 화이팅!!✊");
+
+                // 선인장 초기 상태 데이터 정의
+                const cactusData = {
+                    이름: name,
+                    성장단계: 0,
+                    습도: 30,
+                    햇빛: "창가",
+                    함께한날: 0
+                };
+
+                // 게임 데이터 로컬 스토리지에 저장 후 다음 페이지로 이동
+                localStorage.setItem("myCactus", JSON.stringify(cactusData)); // 객체를 JSON 문자열로 변환하여 저장
+                window.location.href = "cactus.html"; // 'cactus.html' 페이지로 이동
+            } else {
+                // 이름이 입력되지 않았다면 경고 메시지 출력
+                alert("선인장의 이름을 입력해주세요!");
+            }
+        }
+
+        // 선인장 이미지 순환을 위한 변수 및 이미지 목록
+        var num = 0; // 현재 이미지 인덱스
+        var imgs = ['image/중간.png', 'image/완성.png', 'image/씨앗.png']; // 순환할 이미지 경로들
+
+        // 이미지 소스를 변경하는 함수
+        function change(imgElement) {
+            imgElement.setAttribute('src', imgs[num]); // 이미지 소스 업데이트
+            num = (num + 1) % imgs.length;             // 다음 이미지 인덱스로 업데이트 (배열 순환)
+        }
+
+        // 페이지 로드 완료 시 실행
+        window.onload = function () {
+            var img = document.getElementById('bookImage0');
+
+            // 선인장 이미지 1초마다 자동 변경 (애니메이션 효과)
+            setInterval(function () { change(img); }, 1000);
+
+            // 이전 페이지에서 '선택 2번' 엔딩을 봤는지 확인
+            const choice2Done = localStorage.getItem("choice2Done"); // 로컬 스토리지에서 값 가져오기
+            if (choice2Done === "true") { // 값이 'true'라면 (이전 엔딩 조건 충족)
+                // 보상 '돈' 이미지 표시
+                document.getElementById("moneyLeft").style.display = "block";
+                document.getElementById("moneyRight").style.display = "block";
+            }
+        }
+    </script>
+</body>
+
+</html>

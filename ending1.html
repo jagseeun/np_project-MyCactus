@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>엔딩1 - 선인장 키우기 성공!</title>
+
+    <style>
+        body {
+            background-color: rgb(196, 218, 196);
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* 텍스트 및 제목을 감싸는 컨테이너 */
+        .content-container {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        /* 초기에는 안 보이게 설정 */
+        .title,
+        video,
+        #check {
+            display: none;
+        }
+
+        /* 제목 스타일 */
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4a6b5a;
+            margin-bottom: 30px;
+        }
+
+        /* 성공 메시지 스타일 */
+        .success-message {
+            font-size: 30px;
+            color: #67a067;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* 보조 설명 텍스트 */
+        .subtitle {
+            font-size: 20px;
+            color: #7a8a7a;
+            margin-bottom: 40px;
+        }
+
+        /* 동영상 스타일 */
+        video {
+            width: 40%;
+            max-width: 450px;
+            height: auto;
+            z-index: 1;
+            margin-bottom: 30px;
+        }
+
+        /* 버튼을 감싸는 컨테이너 */
+        .button-container {
+            text-align: center;
+            z-index: 2;
+        }
+
+        /* 확인 버튼 스타일 */
+        #check {
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            background: #6b8a73;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content-container">
+        <h1 class="title">My Cactus♡</h1>
+        <div class="success-message" id="done"></div>
+        <div class="subtitle">축하합니다! 선인장이 건강하게 자랐어요 🌵</div>
+    </div>
+
+    <video id="myVideo" src="vidio/ending1.mp4" muted playsinline loop controls autoplay></video>
+
+    <div class="button-container">
+        <button id="check"></button>
+    </div>
+
+    <script>
+        // 주요 HTML 요소 선택
+        const title = document.querySelector(".title");
+        const successMessage = document.getElementById("done");
+        const subtitle = document.querySelector(".subtitle");
+        const video = document.getElementById("myVideo");
+        const button = document.getElementById("check");
+
+        let cactusData = null;
+
+        // 로컬 스토리지에서 선인장 데이터 불러오기
+        successMessage.innerText = `선인장이 완전히 성장하였습니다.`; // 일반 메시지
+
+
+        // 3초 후, 특정 요소들을 숨기고 다른 요소들을 표시
+        setTimeout(() => {
+            successMessage.style.display = "none"; // 성공 메시지 숨김
+            subtitle.style.display = "none";       // 보조 설명 숨김
+
+            title.style.display = "block";         // 제목 표시
+            video.style.display = "block";         // 동영상 표시
+
+            // 버튼 텍스트 설정 (선인장 이름 유무에 따라)
+
+            button.innerText = `선인장 상태 확인 완료`;
+            button.style.display = "block";        // 버튼 표시
+        }, 3000); // 3초 대기
+
+        // 버튼 클릭 시 로컬 스토리지 초기화 및 페이지 이동
+        button.addEventListener("click", () => {
+            window.location.href = "trueStory.html"; // 'trueStory.html' 페이지로 이동
+        });
+    </script>
+</body>
+
+</html>

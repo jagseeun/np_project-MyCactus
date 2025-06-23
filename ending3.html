@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>선인장 사망...</title>
+    <style>
+        body {
+            background-color: #b8d2d4;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 40px 20px 20px;
+            box-sizing: border-box;
+        }
+
+        .content-container {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4a5c6b;
+            margin-bottom: 30px;
+        }
+
+        .message {
+            font-size: 20px;
+            color: #5a6b6a;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #7a898a;
+            margin-bottom: 10px;
+        }
+
+        #restartBtn {
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 25px;
+            background: #6b808a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        video {
+            width: 45%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 20px;
+            z-index: 1;
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            text-align: center;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content-container">
+        <h1 class="title">My Cactus♡</h1>
+        <div class="message" id="message"></div> <div class="subtitle">과습으로 인해 하늘나라로 떠났습니다...</div> </div>
+
+    <video id="myVideo" src="vidio/ending3.mp4" muted playsinline autoplay loop></video> <div class="button-container">
+        <button id="restartBtn">다시 하기</button> </div>
+
+    <script>
+        // HTML 요소 가져오기
+        const video = document.getElementById("myVideo");     // 비디오 요소
+        const message = document.getElementById("message");   // 메시지 표시 영역
+        const button = document.getElementById("restartBtn"); // '다시 하기' 버튼
+
+        message.innerText = `선인장이 과습으로 세상을 떠났습니다.`; // 일반 사망 메시지
+
+        // '다시 하기' 버튼 클릭 이벤트 리스너
+        button.addEventListener("click", () => {
+            window.location.href = "main.html"; // 'main.html' 페이지로 이동 (게임 재시작)
+        });
+    </script>
+</body>
+
+</html>
