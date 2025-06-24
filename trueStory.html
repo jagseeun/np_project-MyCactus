@@ -93,13 +93,11 @@
 
 <body>
     <div class="game-container">
-        <img id="mainImage" src="코끼리/1.png" />
-
+        <img id="mainImage" src="1.png" />
         <div class="buttons" id="choiceButtons">
             <button onclick="showChoice1()">내 선인장이나 돌려내</button>
             <button onclick="showChoice2()">그래 용서 해줄게</button>
         </div>
-
         <div id="endingButtons" class="buttons">
             <button onclick="window.close()">종료하기</button>
             <button onclick="location.href='index.html'">다시하기</button>
@@ -107,107 +105,80 @@
     </div>
 
     <script>
-        // --- JavaScript 코드 시작 ---
-
-        // 인트로 애니메이션에 사용할 이미지 경로 목록
         const imageList = [
-            "코끼리/1.png",
-            "코끼리/2.png",
-            "코끼리/3.png",
-            "코끼리/4.png"
+            "1.png",
+            "2.png",
+            "3.png",
+            "4.png"
         ];
 
-        // '선택 2' 시나리오에 사용할 이미지 경로 목록
         const choice2List = [
-            "코끼리/선택-2.png",
-            "코끼리/선택-2-1.png",
-            "코끼리/선택-2-2.png",
-            "코끼리/선택-2-3.png",
-            "코끼리/선택-2-4.png",
-            "코끼리/선택-2-5.png",
-            "코끼리/선택-2-6.png",
-            "코끼리/선택-2-7.png",
-            "코끼리/선택-2-8.png",
-            "코끼리/선택-2-9.png",
-            "코끼리/선택-2-10.png",
-            "코끼리/선택-2-11.png",
-            "코끼리/선택-2-12.png",
-            "코끼리/선택-2-13.png"
+            "선택-2.png",
+            "선택-2-1.png",
+            "선택-2-2.png",
+            "선택-2-3.png",
+            "선택-2-4.png",
+            "선택-2-5.png",
+            "선택-2-6.png",
+            "선택-2-7.png",
+            "선택-2-8.png",
+            "선택-2-9.png",
+            "선택-2-10.png",
+            "선택-2-11.png",
+            "선택-2-12.png",
+            "선택-2-13.png"
         ];
 
-        // HTML 요소 참조 가져오기
-        const mainImage = document.getElementById("mainImage");        // 메인 이미지 태그
-        const buttons = document.getElementById("choiceButtons");      // 첫 번째 선택 버튼 그룹
-        const endingButtons = document.getElementById("endingButtons");  // 마지막 엔딩 버튼 그룹
+        const mainImage = document.getElementById("mainImage");
+        const buttons = document.getElementById("choiceButtons");
+        const endingButtons = document.getElementById("endingButtons");
+        let index = 0;
 
-        let index = 0; // 현재 이미지 인덱스 추적 변수
-
-        // --- 인트로 이미지 순차적으로 보여주기 함수 ---
-        // 페이지 로드 시 자동 실행
         function showNextImage() {
             if (index < imageList.length) {
-                mainImage.src = imageList[index];         // 이미지 변경
-                mainImage.style.display = "block";        // 이미지 표시
-
-                // 이미지별 지연 시간 설정: 첫 3개는 0.5초, 마지막은 2초
+                mainImage.src = imageList[index];
+                mainImage.style.display = "block";
                 let delay = (index < 3) ? 500 : 2000;
-                index++; // 다음 인덱스로 이동
-
-                setTimeout(showNextImage, delay); // 지정된 시간 후 재귀 호출
+                index++;
+                setTimeout(showNextImage, delay);
             } else {
-                // 인트로 끝, 선택 버튼 표시
                 buttons.style.display = "flex";
             }
         }
 
-        // --- '선택 1번' 클릭 시 동작 함수 ---
-        // "내 선인장이나 돌려내" 버튼
         function showChoice1() {
-            localStorage.setItem("choice2Done", "false"); // 로컬 스토리지에 선택 기록 저장
-            mainImage.src = "코끼리/선택-1.png";           // 특정 이미지 표시
-            buttons.style.display = "none";             // 선택 버튼 숨김
-
-            // 3초 후 main.html 페이지로 이동
+            localStorage.setItem("choice2Done", "false");
+            mainImage.src = "선택-1.png";
+            buttons.style.display = "none";
             setTimeout(() => {
                 window.location.href = "index.html";
             }, 3000);
         }
 
-        // --- '선택 2번' 클릭 시 동작 함수 ---
-        // "그래 용서 해줄게" 버튼
         function showChoice2() {
-            buttons.style.display = "none";             // 선택 버튼 숨김
-            localStorage.setItem("choice2Done", "true");  // 로컬 스토리지에 선택 기록 저장
-
-            // 선택 2번 스토리 이미지 순차적으로 보여주기 위한 내부 함수
-            let i = 0; // choice2List용 인덱스
+            buttons.style.display = "none";
+            localStorage.setItem("choice2Done", "true");
+            let i = 0;
             function showNextChoice2Image() {
                 if (i < choice2List.length) {
-                    mainImage.src = choice2List[i];         // 이미지 변경
-                    mainImage.style.display = "block";        // 이미지 표시
-
-                    // 이미지별 지연 시간 설정
-                    let delay = 1500; // 기본 1.5초
-                    if (i >= 1 && i <= 8) delay = 500; // 일부는 0.5초
-                    if (i === 9 || i === 10) delay = 2000; // 일부는 2초
-
-                    // 마지막 이미지 표시 후 엔딩 버튼 표시
+                    mainImage.src = choice2List[i];
+                    mainImage.style.display = "block";
+                    let delay = 1500;
+                    if (i >= 1 && i <= 8) delay = 500;
+                    if (i === 9 || i === 10) delay = 2000;
                     if (i === choice2List.length - 1) {
                         setTimeout(() => {
                             endingButtons.style.display = "flex";
                         }, delay);
                     }
-
-                    i++; // 다음 인덱스로 이동
-                    setTimeout(showNextChoice2Image, delay); // 지정된 시간 후 재귀 호출
+                    i++;
+                    setTimeout(showNextChoice2Image, delay);
                 }
             }
-
-            showNextChoice2Image(); // 선택 2번 스토리 시작
+            showNextChoice2Image();
         }
 
-        // --- 페이지 로드 완료 시 실행 ---
-        window.onload = showNextImage; // 인트로 이미지 시퀀스 시작
+        window.onload = showNextImage;
     </script>
 </body>
 
