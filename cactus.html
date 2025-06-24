@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>선인장 키우기</title>
     <style>
-        /* 기본 배경 및 폰트 설정 */
         body {
             background-color: rgb(196, 218, 196);
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
         }
-
-        /* 오른쪽 상단 Day 표시 */
         #dayLabel {
             position: absolute;
             top: 10px;
@@ -22,28 +18,20 @@
             color: #555;
             font-size: 18px;
         }
-
-        /* 선인장 이름 표시 */
         #nameLabel {
             margin-top: 20px;
             font-size: 24px;
             font-weight: bold;
             color: rgb(67, 120, 67);
         }
-
-        /* 선인장 이미지 영역 설정 */
         .egg-container {
             position: relative;
             margin-top: 50px;
         }
-
-        /* 선인장 이미지 */
         #egg {
             width: 450px;
             height: auto;
         }
-
-        /* 물 주기 이펙트 이미지 */
         #water-splash {
             position: absolute;
             top: 20px;
@@ -52,16 +40,12 @@
             width: 100px;
             display: none;
         }
-
-        /* 버튼 컨테이너 */
         .btn-container {
             margin-top: 30px;
             display: flex;
             justify-content: center;
             gap: 30px;
         }
-
-        /* 버튼 이미지 설정 */
         .btn-img {
             width: 100px;
             height: 100px;
@@ -70,16 +54,12 @@
             background: none;
             padding: 0;
         }
-
-        /* 다크모드 (햇빛 없을 때) 스타일 */
         .dark-mode {
             background-color: #2e2e2e !important;
         }
-
         .dark-mode #nameLabel {
             color: rgb(150, 200, 150) !important;
         }
-
         .dark-mode #dayLabel {
             color: #ccc !important;
         }
@@ -91,137 +71,102 @@
     <div id="nameLabel"></div>
 
     <div class="egg-container">
-        <img id="egg" src="image/씨앗.png" alt="씨앗">
-        <img id="water-splash" src="image/물뿌리개.png" alt="물 뿌리기" style="width: 240px; margin-left:80px;">
+        <img id="egg" src="씨앗.png" alt="씨앗">
+        <img id="water-splash" src="물뿌리개.png" alt="물 뿌리기" style="width: 240px; margin-left:80px;">
     </div>
 
     <div class="btn-container">
         <button class="btn-img" onclick="giveWater()">
-            <img src="image/water.png" alt="물 주기 버튼" style="width: 100%; height: 100%;">
+            <img src="water.png" alt="물 주기 버튼" style="width: 100%; height: 100%;">
         </button>
         <button class="btn-img" onclick="toggleSun()">
-            <img src="image/sun.png" alt="햇빛 버튼" style="width: 100%; height: 100%;">
+            <img src="sun.png" alt="햇빛 버튼" style="width: 100%; height: 100%;">
         </button>
     </div>
 
     <script>
-        // 로컬 스토리지에서 선인장 정보 불러오기
         let cactus = JSON.parse(localStorage.getItem("myCactus"));
-
-        // 저장된 데이터가 없으면 경고 후 메인 화면으로 이동
         if (!cactus) {
             alert("이름이 없습니다. 처음 화면으로 돌아갑니다.");
             window.location.href = "index.html";
         }
 
-        // HTML 요소 가져오기
         const nameLabel = document.getElementById("nameLabel");
         const dayLabel = document.getElementById("dayLabel");
         const eggImg = document.getElementById("egg");
 
-        // 선인장 속성 초기값 설정 (저장된 데이터 또는 기본값 사용)
         let name = cactus.이름 || "이름 없음";
         let humidity = cactus.습도 || 30;
         let togetherDays = cactus.함께한날 || 0;
-        let sunlight = cactus.햇빛 || "창가"; // '창가' (햇빛 있음) 또는 '집안' (햇빛 없음)
-        let isDark = sunlight === "집안"; // 현재 햇빛 상태를 바탕으로 다크모드 여부 결정
+        let sunlight = cactus.햇빛 || "창가";
+        let isDark = sunlight === "집안";
 
-        // 선인장 이름 표시
         nameLabel.textContent = name;
-
-        // 초기 화면 상태 업데이트
         updateView();
 
-        /**
-         * 현재 선인장 상태를 화면에 반영하고 엔딩 조건을 확인하는 함수.
-         */
         function updateView() {
-            dayLabel.textContent = `Day-${togetherDays}`; // 함께한 날짜 업데이트
+            dayLabel.textContent = `Day-${togetherDays}`;
 
-            // --- 엔딩 조건 확인 ---
             if (humidity <= 0) {
-                localStorage.removeItem("myCactus"); // 'myCactus' 데이터 삭제
-                window.location.href = "ending2.html"; // 습도가 0 이하면 물 부족 엔딩
+                localStorage.removeItem("myCactus");
+                window.location.href = "ending2.html";
                 return;
             }
 
             if (humidity > 100) {
-                localStorage.removeItem("myCactus"); // 'myCactus' 데이터 삭제
-                window.location.href = "ending3.html"; // 습도가 100 초과면 과습 엔딩
+                localStorage.removeItem("myCactus");
+                window.location.href = "ending3.html";
                 return;
             }
 
             if (togetherDays >= 30) {
-                localStorage.removeItem("myCactus"); // 'myCactus' 데이터 삭제
-                window.location.href = "ending1.html"; // 30일 이상 키웠으면 완전 성장 엔딩
+                localStorage.removeItem("myCactus");
+                window.location.href = "ending1.html";
                 return;
-            }
-            // --- 성장 단계별 이미지 변경 ---
-            else if (togetherDays >= 20) {
-                eggImg.src = "image/완성.png"; // 20일 이상: 완성 선인장 이미지
+            } else if (togetherDays >= 20) {
+                eggImg.src = "완성.png";
                 cactus.성장단계 = 2;
             } else if (togetherDays >= 10) {
-                eggImg.src = "image/중간.png"; // 10일 이상: 중간 선인장 이미지
+                eggImg.src = "중간.png";
                 cactus.성장단계 = 1;
             } else {
-                eggImg.src = "image/씨앗.png"; // 10일 미만: 씨앗 이미지
+                eggImg.src = "씨앗.png";
                 cactus.성장단계 = 0;
             }
 
-            // 햇빛 상태에 따라 다크모드 클래스 토글
             document.body.classList.toggle("dark-mode", isDark);
-
-            // 변경된 선인장 데이터를 로컬 스토리지에 저장
             localStorage.setItem("myCactus", JSON.stringify(cactus));
         }
 
-        /**
-         * 선인장에게 물을 주는 함수.
-         * 습도를 증가시키고 물뿌리개 애니메이션을 표시.
-         */
         function giveWater() {
             const splash = document.getElementById("water-splash");
-
-            // 물뿌리개 애니메이션 표시 및 숨김
             splash.style.display = "block";
             setTimeout(() => splash.style.display = "none", 800);
-
-            // 습도 증가 및 데이터 업데이트
             humidity += 10;
             cactus.습도 = humidity;
-            updateView(); // 상태 반영 및 엔딩 조건 재확인
+            updateView();
         }
 
-        /**
-         * 햇빛 상태를 토글하여 배경을 변경하는 함수.
-         * (창가/집안, 즉 햇빛 있음/없음 상태 전환)
-         */
         function toggleSun() {
-            isDark = !isDark; // 다크모드 상태 반전
-            sunlight = isDark ? "집안" : "창가"; // 햇빛 상태 텍스트 업데이트
-
-            // 데이터 업데이트
+            isDark = !isDark;
+            sunlight = isDark ? "집안" : "창가";
             cactus.햇빛 = sunlight;
-            updateView(); // 상태 반영 및 엔딩 조건 재확인
+            updateView();
         }
 
-        // 5분(300초)마다 함께한 날짜 증가
         setInterval(() => {
             togetherDays++;
             cactus.함께한날 = togetherDays;
-            updateView(); // 상태 반영 및 엔딩 조건 재확인
-        }, 300000); // 300000 밀리초 = 5분
+            updateView();
+        }, 300000);
 
-        // 100초마다 습도 감소 (자동으로 건조)
         setInterval(() => {
             humidity -= 15;
             cactus.습도 = humidity;
-            updateView(); // 상태 반영 및 엔딩 조건 재확인
-        }, 10000); // 100000 밀리초 = 100초
+            updateView();
+        }, 10000);
 
-        // 사용자가 창을 벗어났을 때 경고 메시지 출력
         window.addEventListener('blur', function () {
-            // 짧은 지연 후 창이 포커스를 잃었는지 다시 확인
             setTimeout(() => {
                 if (!document.hasFocus()) {
                     alert(`${name}: "어디 가세요...? 저 혼자 두고 가지 마세요... 🥺"`);
@@ -230,5 +175,4 @@
         });
     </script>
 </body>
-
 </html>
