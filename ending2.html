@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>엔딩2 - 말라 죽다..</title>
     <style>
-        /* CSS styles for page layout and appearance */
         body {
             background-color: #d4c4b8;
             margin: 0;
@@ -22,44 +20,37 @@
             padding: 40px 20px 20px;
             box-sizing: border-box;
         }
-
         .content-container {
             text-align: center;
             z-index: 10;
             position: relative;
             margin-bottom: 30px;
         }
-
         .title {
             font-size: 36px;
             font-weight: bold;
             color: #6b5a4a;
             margin-bottom: 30px;
         }
-
         .dry-message {
             font-size: 22px;
             color: #5b4f30;
             margin-bottom: 40px;
         }
-
         .subtitle {
             font-size: 16px;
             color: #8a7a6a;
             margin-bottom: 10px;
         }
-
         #dryCactusImage {
             max-width: 25%;
             height: auto;
             margin-bottom: 30px;
         }
-
         .button-container {
             text-align: center;
             z-index: 10;
         }
-
         #restartButton {
             padding: 15px 35px;
             font-size: 18px;
@@ -76,23 +67,25 @@
 <body>
     <div class="content-container">
         <h1 class="title">My Cactus♡</h1>
-        <div class="dry-message" id="message"></div> <div class="subtitle">물을 주지 않아 말라 죽어버렸어요...</div> </div>
+        <div class="dry-message" id="message"></div>
+        <div class="subtitle">물을 주지 않아 말라 죽어버렸어요...</div>
+    </div>
 
-    <img id="dryCactusImage" src="image/dry.png" alt="말라버린 선인장" /> <div class="button-container">
-        <button id="restartButton">다시 시작하기</button> </div>
+    <img id="dryCactusImage" src="dry.png" alt="말라버린 선인장" />
+
+    <div class="button-container">
+        <button id="restartButton">다시 시작하기</button>
+    </div>
 
     <script>
-        // HTML 요소 가져오기
-        const messageElement = document.getElementById("message"); // 메시지 표시 영역
-        const restartButton = document.getElementById("restartButton"); // '다시 시작하기' 버튼
+        const messageElement = document.getElementById("message");
+        const restartButton = document.getElementById("restartButton");
 
-        messageElement.innerText = `선인장이 말라 죽었습니다.`; // 일반 사망 메시지
+        messageElement.innerText = `선인장이 말라 죽었습니다.`;
 
-        // '다시 시작하기' 버튼 클릭 이벤트 리스너
         restartButton.addEventListener('click', () => {
-            window.location.href = 'index.html'; // 'main.html' 페이지로 이동 (게임 재시작)
+            window.location.href = 'index.html';
         });
     </script>
 </body>
-
 </html>
