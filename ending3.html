@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>선인장 사망...</title>
+
+    <title>엔딩1 - 선인장 키우기 성공!</title>
+
     <style>
         body {
-            background-color: #b8d2d4;
+            background-color: rgb(196, 218, 196);
             margin: 0;
             font-family: 'Arial', sans-serif;
             min-height: 100vh;
@@ -18,7 +20,7 @@
             justify-content: center;
             position: relative;
             overflow-x: hidden;
-            padding: 40px 20px 20px;
+            padding: 20px;
             box-sizing: border-box;
         }
 
@@ -26,46 +28,39 @@
             text-align: center;
             z-index: 2;
             position: relative;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+        }
+
+        .title,
+        video,
+        #check {
+            display: none;
         }
 
         .title {
             font-size: 36px;
             font-weight: bold;
-            color: #4a5c6b;
+            color: #4a6b5a;
             margin-bottom: 30px;
         }
 
-        .message {
-            font-size: 20px;
-            color: #5a6b6a;
-            margin-bottom: 30px;
-            line-height: 1.6;
+        .success-message {
+            font-size: 30px;
+            color: #67a067;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
 
         .subtitle {
-            font-size: 16px;
-            color: #7a898a;
-            margin-bottom: 10px;
-        }
-
-        #restartBtn {
-            padding: 15px 35px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 25px;
-            background: #6b808a;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-top: 30px;
+            font-size: 20px;
+            color: #7a8a7a;
+            margin-bottom: 40px;
         }
 
         video {
-            width: 45%;
-            max-width: 500px;
+            width: 40%;
+            max-width: 450px;
             height: auto;
-            border-radius: 20px;
             z-index: 1;
             margin-bottom: 30px;
         }
@@ -74,28 +69,56 @@
             text-align: center;
             z-index: 2;
         }
+
+        #check {
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            background: #6b8a73;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
     <div class="content-container">
         <h1 class="title">My Cactus♡</h1>
-        <div class="message" id="message"></div> <div class="subtitle">과습으로 인해 하늘나라로 떠났습니다...</div> </div>
+        <div class="success-message" id="done"></div>
+        <div class="subtitle">축하합니다! 선인장이 건강하게 자랐어요 🌵</div>
+    </div>
 
-    <video id="myVideo" src="vidio/ending3.mp4" muted playsinline autoplay loop></video> <div class="button-container">
-        <button id="restartBtn">다시 하기</button> </div>
+    <video id="myVideo" src="ending1.mp4" muted playsinline loop controls autoplay></video>
+
+    <div class="button-container">
+        <button id="check"></button>
+    </div>
 
     <script>
-        // HTML 요소 가져오기
-        const video = document.getElementById("myVideo");     // 비디오 요소
-        const message = document.getElementById("message");   // 메시지 표시 영역
-        const button = document.getElementById("restartBtn"); // '다시 하기' 버튼
+        const title = document.querySelector(".title");
+        const successMessage = document.getElementById("done");
+        const subtitle = document.querySelector(".subtitle");
+        const video = document.getElementById("myVideo");
+        const button = document.getElementById("check");
 
-        message.innerText = `선인장이 과습으로 세상을 떠났습니다.`; // 일반 사망 메시지
+        let cactusData = null;
 
-        // '다시 하기' 버튼 클릭 이벤트 리스너
+        successMessage.innerText = `선인장이 완전히 성장하였습니다.`;
+
+        setTimeout(() => {
+            successMessage.style.display = "none";
+            subtitle.style.display = "none";
+
+            title.style.display = "block";
+            video.style.display = "block";
+
+            button.innerText = `선인장 상태 확인 완료`;
+            button.style.display = "block";
+        }, 3000);
+
         button.addEventListener("click", () => {
-            window.location.href = "index.html"; // 'main.html' 페이지로 이동 (게임 재시작)
+            window.location.href = "trueStory.html";
         });
     </script>
 </body>
