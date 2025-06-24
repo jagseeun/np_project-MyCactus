@@ -158,13 +158,13 @@
             togetherDays++;
             cactus.함께한날 = togetherDays;
             updateView();
-        }, 300000);
+        }, 3000);
 
         setInterval(() => {
-            humidity -= 15;
+            humidity -= 1;
             cactus.습도 = humidity;
             updateView();
-        }, 10000);
+        }, 100);
 
         window.addEventListener('blur', function () {
             setTimeout(() => {
