@@ -4,12 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>엔딩1 - 선인장 키우기 성공!</title>
-
+    <title>선인장 사망...</title>
     <style>
         body {
-            background-color: rgb(196, 218, 196);
+            background-color: #b8d2d4;
             margin: 0;
             font-family: 'Arial', sans-serif;
             min-height: 100vh;
@@ -20,7 +18,7 @@
             justify-content: center;
             position: relative;
             overflow-x: hidden;
-            padding: 20px;
+            padding: 40px 20px 20px;
             box-sizing: border-box;
         }
 
@@ -28,39 +26,46 @@
             text-align: center;
             z-index: 2;
             position: relative;
-            margin-bottom: 20px;
-        }
-
-        .title,
-        video,
-        #check {
-            display: none;
+            margin-bottom: 30px;
         }
 
         .title {
             font-size: 36px;
             font-weight: bold;
-            color: #4a6b5a;
+            color: #4a5c6b;
             margin-bottom: 30px;
         }
 
-        .success-message {
-            font-size: 30px;
-            color: #67a067;
-            font-weight: bold;
-            margin-bottom: 15px;
+        .message {
+            font-size: 20px;
+            color: #5a6b6a;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
 
         .subtitle {
-            font-size: 20px;
-            color: #7a8a7a;
-            margin-bottom: 40px;
+            font-size: 16px;
+            color: #7a898a;
+            margin-bottom: 10px;
+        }
+
+        #restartBtn {
+            padding: 15px 35px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 25px;
+            background: #6b808a;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 30px;
         }
 
         video {
-            width: 40%;
-            max-width: 450px;
+            width: 45%;
+            max-width: 500px;
             height: auto;
+            border-radius: 20px;
             z-index: 1;
             margin-bottom: 30px;
         }
@@ -69,56 +74,31 @@
             text-align: center;
             z-index: 2;
         }
-
-        #check {
-            padding: 15px 35px;
-            font-size: 18px;
-            font-weight: 600;
-            background: #6b8a73;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
     </style>
 </head>
 
 <body>
     <div class="content-container">
         <h1 class="title">My Cactus♡</h1>
-        <div class="success-message" id="done"></div>
-        <div class="subtitle">축하합니다! 선인장이 건강하게 자랐어요 🌵</div>
+        <div class="message" id="message"></div>
+        <div class="subtitle">과습으로 인해 하늘나라로 떠났습니다...</div>
     </div>
 
-    <video id="myVideo" src="ending1.mp4" muted playsinline loop controls autoplay></video>
-
+    <video id="myVideo" src="ending3.mp4" muted playsinline autoplay loop></video>
+    
     <div class="button-container">
-        <button id="check"></button>
+        <button id="restartBtn">다시 하기</button>
     </div>
 
     <script>
-        const title = document.querySelector(".title");
-        const successMessage = document.getElementById("done");
-        const subtitle = document.querySelector(".subtitle");
         const video = document.getElementById("myVideo");
-        const button = document.getElementById("check");
+        const message = document.getElementById("message");
+        const button = document.getElementById("restartBtn");
 
-        let cactusData = null;
-
-        successMessage.innerText = `선인장이 완전히 성장하였습니다.`;
-
-        setTimeout(() => {
-            successMessage.style.display = "none";
-            subtitle.style.display = "none";
-
-            title.style.display = "block";
-            video.style.display = "block";
-
-            button.innerText = `선인장 상태 확인 완료`;
-            button.style.display = "block";
-        }, 3000);
+        message.innerText = `선인장이 과습으로 세상을 떠났습니다.`;
 
         button.addEventListener("click", () => {
-            window.location.href = "trueStory.html";
+            window.location.href = "index.html";
         });
     </script>
 </body>
